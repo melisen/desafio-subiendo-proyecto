@@ -1,6 +1,6 @@
 
 const express = require("express")
-const config = require("./config.js")
+
 const session = require("express-session");
 const {Server: HTTPServer} = require("http")
 const {Server: IOServer} = require("socket.io");
@@ -67,7 +67,7 @@ app.get('/api/randoms', routeFork.getRandoms);
 //PERSISTENCIA PRODUCTOS
 const ContenedorMongoDB = require("./ContenedorMongoDB.js");
 const ProdModel = require("./models/productos")
-const Productos = new ContenedorMongoDB(config.DBPROD, ProdModel, "productosDB", "prodcollection" );
+const Productos = new ContenedorMongoDB(DBPROD, ProdModel, "productosDB", "prodcollection" );
 async function conectarMongo(){
   await Productos.connectMG()
 } 
@@ -105,7 +105,7 @@ const RedisStore = require("connect-redis")(session);
 
 //MONGO USUARIOS
 mongoose
-  .connect(config.DATABASEURL)
+  .connect(DATABASEURL)
   .catch((e) => {
     logger.log("error", "cannot connect to Mongo");
     ;
@@ -348,7 +348,7 @@ io.on('connection', async (socket) =>{
                 })          
 })
 //EN TERMINAL: $ node server.js --port *numero del puerto* --> para pasarlo como argumento de minimist
-        httpServer.listen(argsPORT.port || 8080, config.HOST, ()=>{
+        httpServer.listen(argsPORT.port || 8080, ()=>{
             console.log('servidor de express escuchando el puerto ', argsPORT.port)
         })
 
