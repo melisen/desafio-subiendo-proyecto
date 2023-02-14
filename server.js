@@ -66,7 +66,7 @@ const mensajesFS = new ContenedorFS('./mensajes.json')
 
 
 //app.use(express.static(config.DIRSTATIC));
-app.use(express.static(path.join(__dirname, 'public'))); 
+//app.use(express.static(path.join(__dirname, 'public'))); 
 
 //*HANDLEBARS
 app.set('views', './views/')
